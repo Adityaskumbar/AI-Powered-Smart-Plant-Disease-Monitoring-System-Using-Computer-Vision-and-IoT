@@ -1,0 +1,312 @@
+import json
+
+db = {
+    "Apple___Apple_scab": {
+        "description": "Fungal disease causing olive-green to black spots on leaves and fruit. Severely affects fruit quality and yield.",
+        "suggestions": [
+            "Fungicide: Apply Captan, Mancozeb, or Myclobutanil during early spring.",
+            "Fertilizer: Apply a 5% Urea solution to fallen leaves in autumn to speed up decomposition and kill the fungus.",
+            "Care: Rake and destroy fallen leaves; prune to improve air circulation."
+        ]
+    },
+    "Apple___Black_rot": {
+        "description": "A fungal disease causing frogeye leaf spots, fruit rot, and limb cankers.",
+        "suggestions": [
+            "Treatment: Prune out dead or diseased wood at least 15 inches below the canker.",
+            "Fungicide: Apply Captan or Thiophanate-methyl preventative sprays starting at silver tip.",
+            "Care: Remove mummified fruit from the tree and ground."
+        ]
+    },
+    "Apple___Cedar_apple_rust": {
+        "description": "Fungal disease that requires juniper hosts, causing bright orange/yellow spots on apple leaves.",
+        "suggestions": [
+            "Fungicide: Apply Myclobutanil or Mancozeb sprays from pink bud stage to 30 days after bloom.",
+            "Care: Remove nearby eastern red cedars (juniper) within a 2-mile radius if possible.",
+            "Planting: Plant resistant apple varieties like Liberty or Enterprise."
+        ]
+    },
+    "Apple___healthy": {
+        "description": "The apple plant appears perfectly healthy.",
+        "suggestions": [
+            "Fertilizer: Apply a balanced NPK fertilizer (like 10-10-10) in early spring.",
+            "Care: Ensure proper dormant pruning for sunlight penetration and airflow.",
+            "Monitoring: Maintain standard pest control schedules."
+        ]
+    },
+    "Blueberry___healthy": {
+        "description": "The blueberry bush appears healthy.",
+        "suggestions": [
+            "Fertilizer: Use ammonium sulfate or a specialized acid-loving plant fertilizer. Avoid fertilizers with nitrates.",
+            "Soil: Maintain highly acidic soil (pH 4.5-5.5) using elemental sulfur if necessary.",
+            "Care: Mulch with pine needles or bark to retain moisture."
+        ]
+    },
+    "Cherry_(including_sour)___Powdery_mildew": {
+        "description": "Fungal disease leaving a white, powdery coating on leaves and newly developing shoots, distorting growth.",
+        "suggestions": [
+            "Treatment: Apply Wettable Sulfur, Potassium Bicarbonate, or Neem Oil at first sign of disease.",
+            "Fertilizer: Avoid high-Nitrogen fertilizers during late summer, as they promote susceptible fleshy growth.",
+            "Care: Ensure good air circulation and avoid overhead watering."
+        ]
+    },
+    "Cherry_(including_sour)___healthy": {
+        "description": "The cherry plant is healthy.",
+        "suggestions": [
+            "Fertilizer: Apply low-nitrogen fertilizer like 5-10-10 in early spring.",
+            "Treatment: Apply dormant oil spray in late winter to smother overwintering pest eggs.",
+            "Care: Prune in late summer to avoid bacterial canker infections."
+        ]
+    },
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+        "description": "Fungal disease causing rectangular, pale brown to gray spots strictly bounded by leaf veins. Can cause severe yield loss.",
+        "suggestions": [
+            "Fungicide: Apply foliar fungicides like Azoxystrobin or Pyraclostrobin at tasseling (VT) stage.",
+            "Fertilizer: Maintain adequate Potassium levels in the soil to improve disease resistance.",
+            "Care: Practice crop rotation and plow under corn residues."
+        ]
+    },
+    "Corn_(maize)___Common_rust_": {
+        "description": "Causes brick-red to brown pustules, mostly on the upper leaf surfaces, drawing nutrients away from the ear.",
+        "suggestions": [
+            "Fungicide: Spray Mancozeb or Pyraclostrobin early when pustules first appear.",
+            "Care: Plant rust-resistant corn hybrids.",
+            "Fertilizer: Ensure balanced nutrition; excess Nitrogen can sometimes worsen disease severity."
+        ]
+    },
+    "Corn_(maize)___Northern_Leaf_Blight": {
+        "description": "Fungal disease showing large, cigar-shaped, grayish-green to tan lesions.",
+        "suggestions": [
+            "Fungicide: Apply a strobilurin/triazole premix fungicide before lesions reach the upper leaves.",
+            "Care: Plow under crop debris heavily and rotate crops with non-grasses.",
+            "Planting: Use resistant hybrid seeds."
+        ]
+    },
+    "Corn_(maize)___healthy": {
+        "description": "The corn plant is healthy.",
+        "suggestions": [
+            "Fertilizer: Side-dress with Nitrogen (e.g., Urea) when plants are knee-high.",
+            "Care: Keep soil well-watered, especially critically during the silking stage.",
+            "Maintenance: Keep area weed-free to prevent competition."
+        ]
+    },
+    "Grape___Black_rot": {
+        "description": "Fungal disease attacking all green parts of the vine, causing hard, black, shriveled 'mummy' grapes.",
+        "suggestions": [
+            "Fungicide: Apply Mancozeb, Myclobutanil, or Copper-based fungicides right before bloom and 2 weeks after.",
+            "Care: Remove and burn all mummified grapes from the vine and ground.",
+            "Fertilizer: Avoid excess Nitrogen which softens tissues; ensure adequate Calcium for skin strength."
+        ]
+    },
+    "Grape___Esca_(Black_Measles)": {
+        "description": "Complex wood disease causing characteristic 'tiger-stripe' leaf symptoms (yellow/red between veins) and dark berry spotting.",
+        "suggestions": [
+            "Treatment: There is no chemical cure. Protect pruning wounds immediately with paste (e.g., thiophanate-methyl or boric acid).",
+            "Care: Prune out infected wood down to healthy tissue. Avoid pruning during wet weather.",
+            "Action: Mark infected vines and prune them last to avoid spreading tools."
+        ]
+    },
+    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
+        "description": "Fungal disease causing dark red to brown spots with prominent yellow halos on older grape leaves.",
+        "suggestions": [
+            "Fungicide: Spray Bordeaux mixture (Copper Sulfate + Calcium Hydroxide) or standard copper fungicide.",
+            "Care: Ensure good canopy airflow by strategic pruning and leaf removal.",
+            "Orchard maintenance: Rake up and destroy fallen leaves."
+        ]
+    },
+    "Grape___healthy": {
+        "description": "The grape vine is healthy.",
+        "suggestions": [
+            "Fertilizer: Apply a NPK 10-10-10 fertilizer just as buds begin to swell.",
+            "Care: Perform proper dormant pruning to manage crop load.",
+            "Monitoring: Keep an eye out for leafhoppers and aphids."
+        ]
+    },
+    "Orange___Haunglongbing_(Citrus_greening)": {
+        "description": "A fatal bacterial disease spread by the Asian citrus psyllid. Causes mottling leaves, branch dieback, and misshapen, bitter green fruit.",
+        "suggestions": [
+            "Treatment: No cure exists. Remove and destroy infected trees immediately to protect the grove.",
+            "Pesticide: Control psyllid vectors using Imidacloprid or Dinotefuran.",
+            "Fertilizer: Enhanced foliar nutritional sprays (Zinc, Iron, Manganese) can prolong the productive life of mildly affected trees before removal."
+        ]
+    },
+    "Peach___Bacterial_spot": {
+        "description": "Bacterial infection causing angular dead spots on leaves that drop out (shot-hole) and pitted, scabby lesions on fruit.",
+        "suggestions": [
+            "Treatment: Spray Copper-based bactericides or Oxytetracycline during late dormant stage and early fruit growth.",
+            "Fertilizer: Avoid excessive Nitrogen, which promotes overly succulent, highly susceptible new growth.",
+            "Care: Plant resistant peach varieties."
+        ]
+    },
+    "Peach___healthy": {
+        "description": "The peach tree is healthy.",
+        "suggestions": [
+            "Fertilizer: Apply 1/2 pound of 10-10-10 per year of tree age in early spring.",
+            "Care: Prune heavily for an open-center shape to maximize sunlight penetration.",
+            "Harvest: Thin fruit to 6-8 inches apart to prevent branch breaking and ensure large fruits."
+        ]
+    },
+    "Pepper,_bell___Bacterial_spot": {
+        "description": "Bacterial disease causing small, water-soaked spots that turn dark, leading to severe leaf drop and sun-scalded fruit.",
+        "suggestions": [
+            "Treatment: Apply Copper oxychloride combined with Mancozeb to reduce bacterial spread.",
+            "Care: Pathogen survives in seeds and debris. Use certified pathogen-free seed and rotate crops.",
+            "Prevention: Avoid overhead watering; use drip irrigation exclusively."
+        ]
+    },
+    "Pepper,_bell___healthy": {
+        "description": "The bell pepper plant is healthy.",
+        "suggestions": [
+            "Fertilizer: Apply Calcium nitrate to prevent Blossom End Rot; use low Nitrogen once flowering begins to promote fruiting.",
+            "Care: Maintain highly consistent soil moisture to prevent fruit drop.",
+            "Support: Stake heavy plants to prevent stem breakage."
+        ]
+    },
+    "Potato___Early_blight": {
+        "description": "Fungal disease from Alternaria forming dark, target-like concentric rings on older lower leaves.",
+        "suggestions": [
+            "Fungicide: Apply Chlorothalonil or Mancozeb preventatively when plants are 6 inches tall.",
+            "Fertilizer: Keep Nitrogen and Potassium levels optimal—blight severely attacks nutrient-stressed plants.",
+            "Care: Allow tubers to mature completely before harvest to prevent skin damage."
+        ]
+    },
+    "Potato___Late_blight": {
+        "description": "A very destructive water-mold disease causing large purple/black water-soaked patches on leaves, white mold underneath, and foul-smelling tuber rot.",
+        "suggestions": [
+            "Fungicide: Apply systematic fungicides like Mefenoxam or purely preventative Copper sprays immediately.",
+            "Action: Destroy infected plants and volunteer potatoes immediately. Do not compost.",
+            "Care: Plant only certified disease-free seed potatoes."
+        ]
+    },
+    "Potato___healthy": {
+        "description": "The potato plant is healthy.",
+        "suggestions": [
+            "Fertilizer: Use a high-phosphorus fertilizer like 5-10-10 at planting. Avoid fresh manure (causes scab).",
+            "Care: Hilling (mounding soil high around the stems) prevents green, toxic potatoes.",
+            "Watering: Maintain 1-2 inches of water per week."
+        ]
+    },
+    "Raspberry___healthy": {
+        "description": "The raspberry plant is healthy.",
+        "suggestions": [
+            "Fertilizer: Apply a balanced 10-10-10 fertilizer in early spring when growth starts.",
+            "Care: Prune out all two-year-old ('floricane') canes immediately after fruiting to disease-proof.",
+            "Maintenance: Keep patch weeded and maintain a strong trellis."
+        ]
+    },
+    "Soybean___healthy": {
+        "description": "The soybean crop is healthy.",
+        "suggestions": [
+            "Fertilizer: Soybeans fix their own nitrogen; ensure adequate Phosphorus (P) and Potassium (K) instead.",
+            "Care: Scout weekly for stink bugs and soybean aphids.",
+            "Moisture: Ensure deep watering during the critical pod-filling stage."
+        ]
+    },
+    "Squash___Powdery_mildew": {
+        "description": "A very common fungal disease displaying a white, dusty powdery coating mostly on upper leaf surfaces, reducing yield.",
+        "suggestions": [
+            "Treatment: Spray with Wettable Sulfur, Neem oil, or Potassium Bicarbonate at the strict onset of spots.",
+            "Fertilizer: Avoid excess Nitrogen additions mid-season which fuels vulnerable lush foliage.",
+            "Care: Improve airflow by increasing plant spacing; water only the soil base."
+        ]
+    },
+    "Strawberry___Leaf_scorch": {
+        "description": "Fungal disease causing irregular dark purple/brown spots on leaves. Leaves eventually dry up and look 'scorched' by fire.",
+        "suggestions": [
+            "Fungicide: Apply Captan or Myclobutanil sprays from early spring through harvest.",
+            "Fertilizer: Apply a balanced NPK fertilizer with micronutrients to prevent plant stress.",
+            "Care: Remove and destroy severely infected leaves; renovate strawberry beds by mowing post-harvest.",
+            "Preventative: Keep roots well-drained and avoid overhead irrigation to keep the canopy dry."
+        ]
+    },
+    "Strawberry___healthy": {
+        "description": "The strawberry plant looks perfectly healthy.",
+        "suggestions": [
+            "Fertilizer: Apply a balanced 10-10-10 fertilizer after the final harvest (renovation time), not in spring.",
+            "Care: Keep a heavy layer of straw mulch to keep berries off bare dirt.",
+            "Maintenance: Pinch off all runners in the first year to force root growth."
+        ]
+    },
+    "Tomato___Bacterial_spot": {
+        "description": "Bacterium causing small, dark, water-soaked, scabby spots on leaves and fruit, causing severe defoliation.",
+        "suggestions": [
+            "Treatment: Spray a mixture of Copper bactericide and Mancozeb every 7-10 days.",
+            "Fertilizer: Avoid working in wet foliage which spreads the bacteria easily.",
+            "Care: Rotate out of tomatoes/peppers for 2-3 years if severe; use pathogen-free seed."
+        ]
+    },
+    "Tomato___Early_blight": {
+        "description": "Alternaria fungus causing distinct 'bullseye' (concentric ring) yellow/brown spots on the lowest, oldest leaves first.",
+        "suggestions": [
+            "Fungicide: Spray Chlorothalonil, Mancozeb, or Copper fungicide.",
+            "Fertilizer: Ensure strong soil fertility with balanced NPK; stressed plants get it worse. Add compost.",
+            "Care: Prune bottom leaves 12 inches up the stem so soil doesn't splash onto them. Mulch heavily."
+        ]
+    },
+    "Tomato___Late_blight": {
+        "description": "Highly contagious, devastating disease (cause of Irish Potato Famine). Leaves develop large, dark, water-soaked greasy patches and white fuzz underneath.",
+        "suggestions": [
+            "Treatment: Apply commercial fungicides containing Mefenoxam or Chlorothalonil aggressively.",
+            "Action: If severely hit, pull the entire plant, bag it in plastic, and throw it in the trash.",
+            "Care: Never leave infected material in the garden over winter."
+        ]
+    },
+    "Tomato___Leaf_Mold": {
+        "description": "Pale greenish-yellow spots on the upper leaf surface directly above fuzzy, olive-green fungal growth on the underside. Thrives in high humidity/greenhouses.",
+        "suggestions": [
+            "Fungicide: Apply Copper fungicides or Chlorothalonil.",
+            "Care: Maximize ventilation! Space plants further apart and prune heavily to let wind pass through.",
+            "Environment: Keep greenhouse humidity below 85%."
+        ]
+    },
+    "Tomato___Septoria_leaf_spot": {
+        "description": "Fungus causing numerous tiny, circular spots with dark borders and pale gray centers on older leaves.",
+        "suggestions": [
+            "Fungicide: Spray Mancozeb or Chlorothalonil as soon as spots appear.",
+            "Care: Do not compost infected leaves; the fungus survives winter. Stake plants vigorously.",
+            "Environment: Water with drip lines to strictly avoid wetting the foliage."
+        ]
+    },
+    "Tomato___Spider_mites Two-spotted_spider_mite": {
+        "description": "Microscopic arachnids that suck plant sap, causing leaves to look stippled (yellow/white dots) with fine silk webbing visible.",
+        "suggestions": [
+            "Treatment: Use horticultural oils, Neem oil, or miticides like Abamectin/Spiromesifen.",
+            "Care: Mites hate moisture—blast the undersides of leaves with a hard stream of water to dislodge them.",
+            "Condition: Spider mites target drought-stressed plants; water deeply and consistently."
+        ]
+    },
+    "Tomato___Target_Spot": {
+        "description": "Fungal disease causing small sunken dark lesions with distinct rings, affecting fruit with deep brown pits.",
+        "suggestions": [
+            "Fungicide: Apply targeted fungicides like Azoxystrobin, Mancozeb, or Copper hydroxide.",
+            "Care: Prune lower leaves to increase airflow and reduce contact with moist soil.",
+            "Maintenance: Add thick organic mulch to limit soil splashing."
+        ]
+    },
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+        "description": "A devastating viral infection spread strictly by Silverleaf Whiteflies, causing severe stunting, and striking upward curling/yellowing of new leaves.",
+        "suggestions": [
+            "Treatment: The virus itself is incurable. Pull and destroy the plant right away.",
+            "Pesticide: Kill the whitefly vectors using Imidacloprid, insecticidal soap, or Neem oil.",
+            "Fertilizer: Do not over-fertilize infected plants; use reflective silver mulch to confuse whiteflies."
+        ]
+    },
+    "Tomato___Tomato_mosaic_virus": {
+        "description": "Highly contagious virus causing mottled 'mosaic' pale/dark green patterns on leaves, fern-like distortion, and stunted growth.",
+        "suggestions": [
+            "Treatment: No chemical cure. Destroy the infected plants instantly to save the others.",
+            "Sanitation: Wash hands thoroughly with soap, and soak pruning tools in a 10% bleach solution.",
+            "Warning: Often spread by tobacco products. Do not smoke tobacco near tomato plants."
+        ]
+    },
+    "Tomato___healthy": {
+        "description": "The tomato plant looks incredibly lush, green, and healthy.",
+        "suggestions": [
+            "Fertilizer: Use a 5-10-10 or specialized tomato fertilizer once flowering starts to push energy into the fruit.",
+            "Additives: Add 1 tbsp of bone meal or crushed eggshells to the soil to boost Calcium and prevent Blossom End Rot.",
+            "Care: Prune suckers strictly and ensure the main stem is heavily tied to a strong stake."
+        ]
+    }
+}
+
+with open('backend/disease_db.json', 'w') as f:
+    json.dump(db, f, indent=4)
